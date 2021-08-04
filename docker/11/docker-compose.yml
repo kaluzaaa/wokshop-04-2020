@@ -3,5 +3,8 @@ services:
     redis:
         image: redis
         expose: 
-            - 6379 
-networks:
+            - 6379
+    nginx:
+        image: nginx
+        expose: 
+            - 80

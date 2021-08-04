@@ -8,3 +8,11 @@ services:
         image: nginx
         expose: 
             - 80
+    app:
+        image: app
+        build: ./src
+        depends_on: 
+            - redis
+            - nginx
+        ports: 
+            - 8090:80

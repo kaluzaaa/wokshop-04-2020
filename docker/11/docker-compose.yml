@@ -1,0 +1,7 @@
+version: "3.9"
+services:
+    redis:
+        image: redis
+        expose: 
+            - 6379 
+networks:

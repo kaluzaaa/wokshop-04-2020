@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: kuard
+  labels:
+    name: kuard
+spec:
+  containers:
+  - name: kuard
+    image: gcr.io/kuar-demo/kuard-amd64:1
+    resources: {}
+    livenessProbe:
+      httpGet:
+        path: /healthy
+        port: 8080

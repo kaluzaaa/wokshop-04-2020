@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: aci
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: aci
+  template:
+    metadata:
+      labels:
+        app: aci
+    spec:
+      containers:
+      - name: aci
+        image: aksworkshopeundev.azurecr.io/kaluzny/aci-helloworld
+        resources: {}
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchExpressions:
+                - key: app
+                  operator: In
+                  values:
+                  - "aci" 
+              topologyKey: kubernetes.io/hostname

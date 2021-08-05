@@ -1,0 +1,17 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: aci
+spec:
+  selector:
+    matchLabels:
+      app: aci
+  template:
+    metadata:
+      labels:
+        app: aci
+    spec:
+      containers:
+      - name: aci
+        image: aksworkshopeundev.azurecr.io/kaluzny/aci-helloworld
+        resources: {}

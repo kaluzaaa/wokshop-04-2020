@@ -1,0 +1,47 @@
+# kubectl create cm --dry-run=client kuard-appsettings --from-file=appsettings.json -o yaml > 06-cm-appsettings.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: kuard-appsettings
+data:
+  appsettings.json: |-
+    {
+        "Logging": {
+            "LogLevel": {
+                "Default": "Warning"
+            }
+        },
+        "AllowedHosts": "*",
+        "RedisConnectionString": "localhost:6379",
+        "TestEnv": "cos"
+    }
+  demo.json: |-
+    {
+        "Logging": {
+            "LogLevel": {
+                "Default": "Warning"
+            }
+        },
+        "AllowedHosts": "*",
+        "RedisConnectionString": "localhost:6379",
+        "TestEnv": "cos"
+    }
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: kuard
+  labels:
+    name: kuard
+spec:
+  containers:
+  - name: kuard
+    image: gcr.io/kuar-demo/kuard-amd64:1
+    resources: {}
+    volumeMounts:
+      - mountPath: /app/
+        name: config
+  volumes:
+    - name: config
+      configMap:
+        name: kuard-appsettings

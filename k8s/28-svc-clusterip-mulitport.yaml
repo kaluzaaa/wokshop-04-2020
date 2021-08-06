@@ -6,7 +6,9 @@ spec:
   selector:
     app: helloapp
   ports:
-  - port: 80
+  - name: http
+    port: 80
     targetPort: http
-  - port: 8080
+  - name: http8080
+    port: 8080
     targetPort: http

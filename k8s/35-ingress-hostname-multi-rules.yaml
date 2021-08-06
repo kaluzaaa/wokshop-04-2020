@@ -1,0 +1,28 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: echo
+  labels:
+    name: echo
+spec:
+  rules:
+  - host: kaluzny-echo-v1.gp.kaluzny.io
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: echo-v1
+            port: 
+              number: 8080
+  - host: kaluzny-echo-v2.gp.kaluzny.io
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: echo-v2
+            port: 
+              number: 8080

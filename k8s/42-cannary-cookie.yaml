@@ -1,0 +1,20 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: pets-dog
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/canary: "true"
+    nginx.ingress.kubernetes.io/canary-by-cookie: "dog_lover"
+spec:
+  rules:
+  - host: kaluzny-app-cannary.gp.kaluzny.io
+    http:
+      paths:
+      - backend:
+          service:
+            name: pets-dog
+            port:
+              number: 8080
+        path: /
+        pathType: Prefix
